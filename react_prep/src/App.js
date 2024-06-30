@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import ProductList from "./components/ProductList";
 import { useState } from "react";
 import Footer from "./components/Footer";
+import AddItem from "./components/AddItem";
 
 function App() {
   const initialProducts = [
@@ -58,10 +59,22 @@ function App() {
     setProductList(newProductList);
   };
 
+  const addItem = (name, price) => {
+    let newProductList = [...productList];
+    newProductList.push({
+      name: name,
+      price: price,
+      quantity: 0,
+      id: newProductList.length + 1,
+    });
+    setProductList(newProductList);
+  }
+
   return (
     <>
       <Navbar></Navbar>
       <main className="container mt-5">
+        <AddItem addItem = {addItem}/>
         <ProductList
           products={productList}
           addQuantity={addQuantity}
